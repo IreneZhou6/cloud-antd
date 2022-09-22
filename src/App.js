@@ -42,7 +42,7 @@ const menuRouter = [
     path: "/order/cloudResourceOrder",
     icon: <CloudOutlined />,
     element: <CloudResourceOrder />,
-    children: []
+    // children: []
   }, {
     menuId: 6,
     menuName: "云服务目录管理",
@@ -55,7 +55,7 @@ const menuRouter = [
       path: "/cloudResource/cloudService",
       icon: null,
       element: <CloudService />,
-      children: []
+      // children: []
       // }, {
       //   menuId: 8,
       //   menuName: "大数据计算服务",
@@ -75,7 +75,7 @@ const menuRouter = [
     path: "/order/cloudServiceOrder",
     icon: <CloudServerOutlined />,
     element: <CloudServiceOrder />,
-    children: []
+    // children: []
     // }, {
     //   menuId: 54,
     //   menuName: "模板管理",
@@ -140,7 +140,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Sidebar menulist={menuRouter} />}>
           {menuRouter.map(menuR => routerRecursion(menuR))}
-          {console.log(menuRouter.map(menuR => routerRecursion(menuR)))}
+          {/* {console.log(menuRouter.map(menuR => routerRecursion(menuR)))} */}
         </Route>
       </Routes>
     </div >

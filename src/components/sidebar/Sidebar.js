@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 
+import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 
 function getItem(item) {
     // console.log(item);
     return {
-        key: item.menuId,
+        // ...item,
+        key: item.path,
         icon: item.icon,
         children: item.children,
         label: item.menuName
@@ -14,16 +16,26 @@ function getItem(item) {
 }
 
 const itemRecursion = (item) => {
-    // if (item.children && item.children.length) {
-    //     return item.children.map(child => itemRecursion(child));
-    // } else {
-    console.log(getItem(item))
+    item = { ...item };
+    if (item.children && item.children.length) {
+        item.children = item.children.map(child => { return itemRecursion(child) });
+        return getItem(item);
+    }
     return getItem(item);
-    // }
 }
 
 export default function Sidebar({ menulist }) {
     const [userInfo, setUserInfo] = React.useState({});
+
+    const menuItem = menulist.map(item => {
+        return itemRecursion(item);
+    })
+    // console.log('menulist', menulist);
+    // console.log('menuItem', menuItem);
+
+    const filteredItem = menuItem.filter(item => {
+        // item.find(ele => {ele.key === userInfo.permission})
+    });
 
     React.useEffect(() => {
         axios('/api/v1/user/userInfo', {
@@ -40,16 +52,11 @@ export default function Sidebar({ menulist }) {
         })
     }, [])
 
-    const menuItem = menulist.map(item => {
-        // itemRecursion(item);
-        getItem(item);
-    })
-    console.log(menulist);
-    console.log(menuItem);
-
     const onClick = (e) => {
         console.log('click ', e);
     };
+
+    console.log('render');
 
     return (
         <>
