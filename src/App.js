@@ -61,12 +61,18 @@ const menuRouter = [
       //   menuName: "大数据计算服务",
       //   path: "/cloudResource/computingService",
       //   element: <ComputingService />,
-      //   children: []
+      //   // children: []
       // }, {
-      //   menuId: 10,
-      //   menuName: "安全服务选配包",
-      //   path: "/cloudResource/optionalPackage",
-      //   element: <OptionalPackage />,
+      //   menuId: 9,
+      //   menuName: "假数据",
+      //   path: "/cloudResource/fakeData",
+      //   element: <ComputingService />,
+      //   // children: []
+      // }, {
+      // menuId: 10,
+      // menuName: "安全服务选配包",
+      // path: "/cloudResource/optionalPackage",
+      // element: <OptionalPackage />,
       //   children: []
     }]
   }, {
