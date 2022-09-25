@@ -2,9 +2,9 @@ import './App.css';
 import 'antd/dist/antd.css';
 
 import { Routes, Route } from "react-router-dom";
-import { CloudOutlined, CloudServerOutlined, CloudSyncOutlined } from '@ant-design/icons';
+import { BarChartOutlined, CloudOutlined, CloudServerOutlined, CloudSyncOutlined } from '@ant-design/icons';
 
-import Sidebar from './components/sidebar/Sidebar';
+// import Sidebar from './components/sidebar/Sidebar';
 import Statistics from './pages/statistics/Statistics';
 import ApplicationOrder from './pages/applicationOrder/ApplicationOrder';
 import ProjectOrder from './pages/projectOrder/ProjectOrder';
@@ -22,6 +22,7 @@ const menuRouter = [
     menuId: 1,
     menuName: "数据统计",
     path: "/",
+    icon: <BarChartOutlined />,
     element: <Statistics />,
     // children: []
   }, {

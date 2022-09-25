@@ -1,67 +1,29 @@
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-} from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
-import React, { useState } from 'react';
-import { Outlet } from 'react-router';
-const { Header, Sider, Content } = Layout;
+import { DatePicker, Form } from 'antd';
+import React from 'react';
 
-export default function CustomLayout() {
-    const [collapsed, setCollapsed] = useState(false);
+const { RangePicker } = DatePicker;
+
+const rangeConfig = {
+    rules: [
+        {
+            type: 'array',
+        },
+    ],
+};
+
+export default function DateForm() {
+    const onFinish = (fieldsValue) => {
+        // Should format date value before submit.
+        const rangeValue = fieldsValue['range-picker'];
+        const dateTime = [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')];
+        console.log('Received values of form: ', dateTime);
+    };
+
     return (
-        <Layout>
-            <Sider trigger={null} collapsible collapsed={collapsed}>
-                <div className="logo">政务云服务辅助系统</div>
-                <Menu
-                    theme="dark"
-                    mode="inline"
-                    defaultSelectedKeys={['1']}
-                    items={[
-                        {
-                            key: '1',
-                            icon: <UserOutlined />,
-                            label: 'nav 1',
-                        },
-                        {
-                            key: '2',
-                            icon: <VideoCameraOutlined />,
-                            label: 'nav 2',
-                        },
-                        {
-                            key: '3',
-                            icon: <UploadOutlined />,
-                            label: 'nav 3',
-                        },
-                    ]}
-                />
-            </Sider>
-            <Layout className="site-layout">
-                <Header
-                    className="site-layout-background"
-                    style={{
-                        padding: 0,
-                    }}
-                >
-                    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                        className: 'trigger',
-                        onClick: () => setCollapsed(!collapsed),
-                    })}
-                </Header>
-                <Content
-                    className="site-layout-background"
-                    style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
-                    }}
-                >
-                    <Outlet />
-                </Content>
-            </Layout>
-        </Layout>
+        <Form name="time_related_controls" onFinish={onFinish}>
+            <Form.Item name="range-picker" label="日期" {...rangeConfig}>
+                <RangePicker />
+            </Form.Item>
+        </Form>
     );
 };

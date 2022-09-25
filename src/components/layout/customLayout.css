@@ -15,12 +15,15 @@
 .logo {
     height: 64px;
     padding: 16px;
+    font-size: 18px;
+    font-weight: 700;
     color: #fff;
     background: #1369ff;
 }
 
 .site-layout .site-layout-background {
     background: #fff;
+    /* border-radius: 12px; */
 }
 
 .ant-layout-sider {
