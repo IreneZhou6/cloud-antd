@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { Menu } from 'antd';
 
 function getItem(item) {
@@ -11,7 +11,7 @@ function getItem(item) {
         key: item.menuId,
         icon: item.icon,
         children: item.children,
-        label: <Link path={item.path}>{item.menuName}</Link>
+        label: <Link to={item.path}>{item.menuName}</Link>
     };
 }
 
@@ -32,7 +32,7 @@ const menuFilter = (menu, fetchedMenu) => {
     return fetchedMenu.filter(item => item.menuId === menu.key)
 }
 
-export default function Sidebar({ menulist }) {
+export default function Sidebar({ children, menulist }) {
     const [userInfo, setUserInfo] = React.useState({});
     const [userMenu, setUserMenu] = React.useState([]);
 
@@ -67,15 +67,19 @@ export default function Sidebar({ menulist }) {
     return (
         <>
             {userMenu &&
-                <Menu
-                    onClick={onClick}
-                    style={{
-                        width: 256,
-                    }}
-                    defaultSelectedKeys={['5']}
-                    mode="inline"
-                    items={userMenu}
-                />
+                <>
+                    <Menu
+                        onClick={onClick}
+                        style={{
+                            width: 256,
+                            height: '100vh'
+                        }}
+                        defaultSelectedKeys={['5']}
+                        mode="inline"
+                        items={userMenu}
+                    />
+                    {children}
+                </>
             }
         </>
     );
