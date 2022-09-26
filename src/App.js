@@ -140,11 +140,9 @@ const menuRouter = [
 
 const routerRecursion = (menu) => {
   if (menu.children && menu.children.length) {
-    // return (<Route path={menu.path} element={menu.element} key={menu.menuId}>
     return menu.children.map(child => {
       return routerRecursion(child)
     })
-    // </Route>)
   }
   return <Route path={menu.path} element={menu.element} key={menu.menuId} />
 }
@@ -152,13 +150,11 @@ const routerRecursion = (menu) => {
 function App() {
   return (
     <div className="App" >
-      {/* <Sidebar menulist={menuRouter}> */}
-      < CustomLayout menuList={menuRouter} >
+      <CustomLayout menuList={menuRouter} >
         <Routes>
           {menuRouter.map(menuR => routerRecursion(menuR))}
         </Routes>
-      </ CustomLayout>
-      {/* </Sidebar> */}
+      </CustomLayout>
     </div >
   );
 }

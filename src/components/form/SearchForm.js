@@ -27,14 +27,6 @@ const rangeConfig = {
     ],
 };
 
-const formItemLayout = {
-    labelCol: {
-        span: 6,
-    },
-    wrapperCol: {
-        span: 6,
-    },
-};
 
 export default function SearchForm() {
     const onFinish = (fieldsValue) => {
@@ -65,82 +57,90 @@ export default function SearchForm() {
                 projectCode: "",
                 projectLeader: "",
                 projectName: "",
-                projectTelephone: ""
+                projectTelephone: "",
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-            layout="inline"
-            {...formItemLayout}
         >
-            <Form.Item
-                className='searchItem'
-                name="projectName"
-                label="项目名称"
-                {...config}>
-                <Input type="text" placeholder='请输入' />
-            </Form.Item>
-            <Form.Item
-                className='searchItem'
-                name="projectCode"
-                label="项目编码"
-                {...config}>
-                <Input type="text" placeholder='请输入' />
-            </Form.Item>
-            <Form.Item
-                className='searchItem'
-                name="projectLeader"
-                label="申请人"
-                {...config}>
-                <Input type="text" placeholder='请输入' />
-            </Form.Item>
-            <Form.Item
-                className='searchItem'
-                name="projectTelephone"
-                label="联系方式"
-            >
-                <Input type="text" placeholder='请输入' />
-            </Form.Item>
-            <Form.Item
-                className='searchItem'
-                name="applicationName"
-                label="应用名称"
-                {...config}>
-                <Input type="text" placeholder='请输入' />
-            </Form.Item>
-            <Form.Item
-                className='searchItem'
-                name="status"
-                label="运行状态"
-            >
-                <Select
-                    style={{
-                        width: 120,
-                    }}
+            <div className="searchFormRow">
+                <Form.Item
+                    // className='searchItem'
+                    name="projectName"
+                    label="项目名称"
+                    {...config}
                 >
-                    <Option value="1">运行中</Option>
-                    <Option value="2">下线</Option>
-                    <Option value="3">未上线</Option>
-                </Select>
-            </Form.Item>
-            <Form.Item
-                className='searchItem'
-                name="dateTime"
-                label="上线日期"
-                {...rangeConfig}>
-                <RangePicker />
-            </Form.Item>
-            <Form.Item>
-                <Button type="primary" htmlType="submit">
-                    查询
-                </Button>
-            </Form.Item>
-            <Form.Item
-            >
-                <Button className="resetBtn" onClick={handleReset}>
-                    重置
-                </Button>
-            </Form.Item>
+                    <Input type="text" placeholder="请输入" />
+                </Form.Item>
+                <Form.Item
+                    // className='searchItem'
+                    name="projectCode"
+                    label="项目编码"
+                    {...config}
+                >
+                    <Input type="text" placeholder="请输入" />
+                </Form.Item>
+                <Form.Item
+                    // className='searchItem'
+                    name="projectLeader"
+                    label="申请人"
+                    {...config}
+                >
+                    <Input type="text" placeholder="请输入" />
+                </Form.Item>
+                <Form.Item
+                    // className='searchItem'
+                    name="projectTelephone"
+                    label="联系方式"
+                >
+                    <Input type="text" placeholder="请输入" />
+                </Form.Item>
+            </div>
+            <div className="searchFormRow">
+                <Form.Item
+                    // className='searchItem'
+                    name="applicationName"
+                    label="应用名称"
+                    {...config}
+                >
+                    <Input type="text" placeholder="请输入" />
+                </Form.Item>
+                <Form.Item
+                    // className='searchItem'
+                    name="status"
+                    label="运行状态"
+                >
+                    <Select
+                        style={{
+                            width: 120,
+                        }}
+                    >
+                        <Option value="1">运行中</Option>
+                        <Option value="2">下线</Option>
+                        <Option value="3">未上线</Option>
+                    </Select>
+                </Form.Item>
+                <Form.Item
+                    // className='searchItem'
+                    name="dateTime"
+                    label="上线日期"
+                    {...rangeConfig}
+                >
+                    <RangePicker />
+                </Form.Item>
+                <div className='btn-group'>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit">
+                            查询
+                        </Button>
+                    </Form.Item>
+                    <Form.Item>
+                        <Button className="resetBtn" onClick={handleReset}>
+                            重置
+                        </Button>
+                    </Form.Item>
+                </div>
+            </div>
         </Form>
     );
 };
