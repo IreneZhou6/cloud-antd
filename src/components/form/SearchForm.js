@@ -28,24 +28,43 @@ const rangeConfig = {
 };
 
 
-export default function SearchForm() {
+export default function SearchForm({ setCondition }) {
     const onFinish = (fieldsValue) => {
         // const projectName = fieldsValue['projectName'];
-        const rangeValue = fieldsValue['dateTime'];
+        const rangeValue = fieldsValue["dateTime"];
         const requestCondition = {
             ...fieldsValue,
-            dateTime: rangeValue && rangeValue.length ? [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')] : [],
-        }
-        console.log('Success:', requestCondition);
+            dateTime:
+                rangeValue && rangeValue.length
+                    ? [
+                        rangeValue[0].format("YYYY-MM-DD"),
+                        rangeValue[1].format("YYYY-MM-DD"),
+                    ]
+                    : [],
+        };
+        setCondition(prev => { return { ...prev, ...requestCondition }; });
+        console.log("Success:", requestCondition);
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        console.log("Failed:", errorInfo);
     };
 
     const handleReset = () => {
+        setCondition((prev) => {
+            return {
+                ...prev,
+                status: "",
+                dateTime: [],
+                applicationName: "",
+                projectCode: "",
+                projectLeader: "",
+                projectName: "",
+                projectTelephone: ""
+            };
+        });
         console.log("reset");
-    }
+    };
 
     return (
         <Form
@@ -128,16 +147,14 @@ export default function SearchForm() {
                 >
                     <RangePicker />
                 </Form.Item>
-                <div className='btn-group'>
+                <div className="btn-group">
                     <Form.Item>
                         <Button type="primary" htmlType="submit">
                             查询
                         </Button>
                     </Form.Item>
                     <Form.Item>
-                        <Button className="resetBtn" onClick={handleReset}>
-                            重置
-                        </Button>
+                        <input className="resetBtn" type="reset" onClick={handleReset} />
                     </Form.Item>
                 </div>
             </div>

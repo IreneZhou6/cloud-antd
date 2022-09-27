@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button } from "antd";
 import CustomCard from "../../components/card/CustomCard";
-// import HookForm from "../../components/form/HookForm";
 import SearchForm from "../../components/form/SearchForm";
 import CustomTable from "../../components/table/CustomTable";
+import BasicModal from "../../components/modal/BasicModal";
 
 const columns = [
     {
@@ -73,29 +72,17 @@ const columns = [
         key: "operation",
         fixed: "right",
         width: 100,
-        render: (record, index) => <Button type="link" disabled={!record.packageNum} style={{ padding: 0 }}>云资源列表</Button>,
+        render: (record, index) => <BasicModal btnDisabled={!record.packageNum} projectId={record.id} />,
     },
 ];
 
 export default function CloudResourceOrder() {
     const [pageData, setPageData] = useState([]);
-    const [condition, setCondition] = useState([]);
-
-    // [
-    //     {
-    //         key: "1",
-    //         applicationName: "John Brown",
-    //         projectName: 32,
-    //         projectCode: "projectCode12415",
-    //         projectLeader: "projectLeader4604",
-    //         projectTelephone: "projectTelephone392597",
-    //         status: "status21950",
-    //         uptime: "uptime398275",
-    //         downtime: "",
-    //         level: "一级",
-    //         packageNum: 5,
-    //     },
-    // ];
+    const [condition, setCondition] = useState({
+        pageNum: 1,
+        pageSize: 10,
+        tab: 2
+    });
 
     useEffect(() => {
         axios('/api/v1/project/page', {
@@ -114,15 +101,15 @@ export default function CloudResourceOrder() {
             console.log(response);
             response && response.data && response.data.data && setPageData(response.data.data);
         })
-    }, [])
+    }, [condition])
 
     return (
         <div className="cloudResourceOrder">
             <CustomCard customClass='searchForm'>
-                <SearchForm />
+                <SearchForm setCondition={setCondition} />
             </CustomCard>
             <CustomCard>
-                <CustomTable columns={columns} pageData={pageData} />
+                <CustomTable columns={columns} pageData={pageData} setCondition={setCondition} />
             </CustomCard>
         </div>
     )
